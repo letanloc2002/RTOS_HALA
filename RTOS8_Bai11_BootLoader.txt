@@ -1,0 +1,59 @@
+BỘ NHỚ
+- Có 3 loại: RAM, FLASH, EPROM
+
+-RAM: khởi tạo biến, tốc độ đọc nhanh, dữ liệu bị mất khi ngưng cấp nguồn.
+-FLASH:Code được lưu trên flash, ghi chậm, đọc nhanh, dữ liệu không bị mất khi ngưng điện, goiw si hạn số lần xóa, ghi, chỉ có thể đọc hoặc ghi theo khối 2/4 byte
+- EPROM: tương tự FLASH, tuy nhiên có thể đọc/ghi theo từng byte
+1.FLASH
+-stm32f1 k có EPROM mà chỉ được cung cấp sẵn 128/64Kb FLASH.
+- được chia nhỏ thành các Page, mỗi Page có kích thước 1Kb.
+- Flash giới hạn về số lần đọc/ghi
+- Vì cấu tạo vật lí nên mỗi lần ghi phải xóa Flash trước.
+- Thường được dùng để lưu chương trình
+- thông thường chương trình sẽ được nạp vào vùng nhớ bắt đầu ở 0x08000000, vùng nhớ phía sau sẽ là trống và người dùng có thể lưu trữ dữ liệu ở vùng này
+- Thư viện Std cung cấp các hàm để giao tiếp với Flash trong module Flash. File "stm32f10x_flash.h"
+- mỗi lần ghi 2byte hoặc 4byte, tuy nhiên mỗi lần xóa phải xóa cả Page.
+- Sơ đồ xóa Flash như hình:
+	+ đầu tiên, kiểm tra cờ LOCK của FLash, nếu cờ này đang được bật, Flash đang ở chế độ Lock và cần được Unlock trước khi sử dụng
+	+ Sau khi Flash đã Unlock, cờ CR_PER được set lên 1
+	+ Địa chỉ của Page cần xóa được ghi vào FAR
+	+ Set bi CR_STRT lên 1 để bắt đầu quá trình xóa
+	+ Kiểm tra cờ BSY đợi hoàn tất quá trình xóa
+
+
+***********************
+
+Quá trình cập nhật phần mềm từ xa.
+- Nạp qua wifi hoặc Bluetooth
+
+
+Bootloader: là chương trình chạy đầu tiên khi khởi động thường có 2 loại là do nhà sx viết và do người dùng viết.
++ Bootloader do nhà sx
+	+ thiết lập hệ thống
+	+ hỗ trợ các  IDE nạp code
++ Bootloader do người dùng viết: 
+	+ Kiểm tra các điều khiện
+	+ Nhận file data mới, lưu vào Flash
+	+ Thực thi chương trình tại vùng nhớ được lưu.
+
+
+****************************
+Quá trình Reset
+Chương trình sau khi Reset sẽ nhảy vào  Reset_Handler(), mà Reset_Handler() nằm trên Vector Table của 1 chương trình.
+Khi chúng ta nạp code, chẳng hạn Application code nạp vào địa chỉ 0x8008000 thì MSP của Application sẽ ở địa chỉ này 0x80080000, còn Vector Table sẽ nằm ở địa chỉ tiếp theo 0x0800.8004. MSP chỉ ra địa chỉ đầu của Vector Table.
+Vi xử lý xác định Bảng Vector Table bằng thanh ghi SCB_VTOR
+=> vậy chúng ta chỉ việc gán giá trị tương ứng vào thanh ghi SCB_VTOR với địa chỉ của App
+
+
+Chương trình Boot
+- Sau khi Reset thì vi điều khiển nhảy đến Reset_Handler() mặc định ở địa chỉ 0x80000000 và nhảy đến hàm Main() của chương trình Boot.
+- chương trình Boot này nó sẽ lấy địa chỉ của chương trình ứng dụng mà chúng ta muốn nhảy đến.
+- Gọi hàm Bootloader(), hàm này sẽ sêt thanh ghi SCB_VTOR theo địa chỉ App muốn nhảy đến, SCB->VTOR = Firmware address.
+- Sau đó nhảy đến hàm Reset mềm(Nhảy đến Reset_Handler()).
+- Bây giờ Firmware mới bắt đầu chạy và Vi xử lí đã nhận diện Reset_Handler() ở địa chỉ mới nên dù có nhấn nút Reset thì nó vẫn chạy trong Application
+
+
+
+
+
+

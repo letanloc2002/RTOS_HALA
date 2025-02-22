@@ -1,0 +1,16 @@
+PERIODIC SCHEDULER
+- pendSV cho phép kích hoạt exception, nhưng nólaf 1 phần của CortexM nên được sử dụng chung trên tất cả các dòng vi điều khiển CortexM
+==>> khi phát triển các OS, PendSV được sử dụng chung để không cần phải tùy chỉnh cho từng dòng VDK
+- PENDSV được kích hoạt bằng cách set bit PENDSVSET trong thanh ghi...
+- mặc định PENDSV có độ ưu tiên thấp nhất
+
+** Trong các bài trước, ta thiết kế OS dùng SysTick Handler để tạo exception thực thiện Contexxt Switching==> tuy nhiên nếu SysTich ISR có độ ưu tiên cao và đang có 1 ISR khác xảy ra, quá trình Context Switching cso thêr gây ra gián đoạn ISR
+
+--> sử dụng PendSV để thực hiện Context Switching sẽ tránh được các tình huống làm gián đoạn khi thực thi ISR
+==> tách việc Context Sưitching khỏi SysTick handler bằng cách đặt nó vào PendSV Handler
+==> Context Switching sẽ thực hiện khi không còn ngắt nào đang chờ
+
+
+Periodic task: là những tác vụ cahyj sau mỗi khoảng thời gian nhất định, thường được dùng để xử lý các tác vụ 1 cách định kì
+- tạo ra bằng quantatime, nhưng sẽ bị phụ thuộc vào quantatime
+- nên sử dung timer riêng

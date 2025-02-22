@@ -1,0 +1,11 @@
+--cpu=Cortex-M4.fp.sp
+"rtos_1\startup_stm32f446xx.o"
+"rtos_1\main.o"
+"rtos_1\system_stm32f4xx.o"
+"rtos_1\oskernel.o"
+"rtos_1\oskernel_1.o"
+"rtos_1\uart.o"
+--strict --scatter "RTOS_1\RTOS_1.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "RTOS_1.map" -o RTOS_1\RTOS_1.axf

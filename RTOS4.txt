@@ -1,0 +1,4 @@
+KERNEL Initialixation
+- sử dụng systtick Interupt sử dụng để tạo ngắt theo chu kì
+
+-

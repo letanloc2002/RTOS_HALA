@@ -1,0 +1,12 @@
+SPORADIC SCHEDULER
+
+Sleep Threads
+- khi muốn 1 task tạm ngừng trong 1 khoảng thời gian cụ thể, có thể sử dụng hàm delay, tuy nhiên hàm delay thông thường sẽ gây lãng phí tài nguyên.
+==> việc đưa thread vào trạng thái Sleep cho phép
+
+-hàm osThread Sleep() cho phép 1 task dừng trong 1 khoảng thời gian
+-khi 1 thread ở trạng thái sleep, scheduler sẽ bỏ qua và Switching đến task tiếp theo
+
+
+-Sporadic task: là những tác vụ chạy không thể đoán trước được thời điển thực thi, nó có thể chạy trong bất kì thời điểm nào
+- thường được thiết kế trong các tình huống quan trọng có thể xảy ra trong hệ thống

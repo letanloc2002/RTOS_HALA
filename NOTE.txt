@@ -1,0 +1,34 @@
+viết 3 chương trình application
+task1: 
+-uart
+-FLASH: 0x0800 1000
+-> xuất file hex
+-> stlink utinity: dọc file hex
+
+tương tự cho các task2,3 nhưng đổi địa chỉ FLASH
+
+tiếp theo:
+tool: API com (win)
+
+câu hỏi: vì sao macro lưu địa chỉ của proccess mà không dùng argument truyền vào function\
+0x08000000
+
+
+*************
+tìm hiểu file hex
+- các dạng: bin, elf, hex
+- phân tích các dạng này để làm tool nạp riêng
+
+hex
+-trường đầu tiên: start code ":"(bắt đầu 1 file mới)
+- trường thứ 2: byte count: 1byte- độ dài của line có record type là data
+- trường thứ 3: address: offset-add-flash = baseaddr+ offset
+- trường thứ 4: record type:
+	+ 00 - (thông báo dòng này chứa Data)
+	+ 01 - (kết thúc file)
+	+ 02 - (mở rộng địa chỉ)
+	+ 03/05(tùy đời): địa chỉ câu lệnh
+- trường cuối: check sum
+
+=> viết công cụ đọc file.hex
+=> phân tích recoed type: data record -> lấy trường data ra -> lưu các data này ra thành 1 file khác-> định nghĩa đuôi (.hala hay gì đó cũng đc, file này là file .exe)

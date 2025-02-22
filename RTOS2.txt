@@ -1,0 +1,56 @@
+---------CPU
+- là trái tim của vdl, nhiệm cụ là tìm và nạp lệnh, giải mã và thực hiện lệnh
+- CU: điều khiển hoạt động của bộ xử lí(control unit)
+- ALU: thực hiện tính toán số học và Logic theo lệnh của CU (Ảithmetic and logic unit)
+- ALu thực hiện tính toán trên bộ thanh ghi
+ ĐỐI CỚI CORTEX=M, sẽ có 16 thanh ghi chính từ R0-R15
+R0-R12 là 13 thanh ghi đa dụng, dùng để tính toán,
+R14: Link Register, lưu vụ trí trả về của 1 hàm.
+R15: PC, chứa địa chỉ lệnh tiếp theo của sẽ được thực thi
+R13: Stack Pointer, trỏ đến đỉnh của Stack. Có 2 Stack Pointer, MSP(main stack pointer) và PSP(process stack pointer)
+
+-------VXL ARM cortex-Ms hoạt động ở 2 chế độ:
+1/ thread mode: tất cả các code chương trình viết trong main() sẽ được thực thi dưới chế độ này của VXL. Mặc định, vi xử lí luôn bắt đầu ở chế độ này
+2/ Handler mode: tất cả các xử lí ngoại lệ (Sýtem Exception) và ngắt (Interrupt) sẽ được thực thi trong thành Handler mode và trình phục vụ tương ứng sẽ được thực thi ở Handler mode.
+
+
+----MSP và PSP
+MSP: là SP được mặc định, được sử dụng ở cả thread mode và handle mode. MSP được sử dụng trong chương trình chính và cả xử lí ngắt
+PSP: là 1 SP thay thế, nó chỉ hoạt động ở Thread mode. PSP thường được sử dụng cho hoạt động của các Task trong hệ thống
+
+Trong Thread mode, bit[1] của thanh ghi CONTROL quy định của SP
+
+
+-----Stack
+- Cortex-M memory map
+ + các vdk cortex-M đều được tổ chức bộ nhớ giống nhau, chỉ khác ở kích thước từng vùng
+Stack được cấp phát trong RAM, là 1 vùng nhớ hoạt động theo kiểu LÌO.
+VĐK là 32bit, nên Stack sẽ hoạt động theo kiểu 32bit, mỗi ô nhớ cách nhau 4byte địa chỉ.
+R13, Stack pointer luôn trỏ tới địa chỉ đỉnh Stack
+
+
+
+-----Exception Handling
+- giá trị trạng thái chương trình được lưu lại
+- bộ xử lý chuyển đến chương trình phục vụ xử lý exception
+- sau khi xử lí exception, các giá trị trạng thái sẽ được khôi phục.
+- chương trình tiếp tục tại nơi mà nó đã tạp dừng để xử lý exception.
++ việc lưu lại giá trị trạng thái chương trình là việc lưu các giá trị thanh ghi trong CPU.
++ khôi phục giá trị tương ứng với việc khôi phục giá trị cho từng tanh ghi tương ứng
+
+
+---- Stack frame
+- các thanh ghi sẽ được bộ xử lí push vào Stack khi exception xảy ra. Bao gồm 8 thanh ghi sắp xếp theo cấu trúc, gọi là Stack Frame, chứa các thông tin:
++ xPSRL chứa thông tin hiện tại của chương trình
++R0,R1,R2,R3,r12
++LR: Chứa địa chi lệnh tiếp theo khi hàm hiện tại trả vể
++PC: chứa địa chỉ lệnh tiếp theo sau khi hoàn tất exception. Có nghĩa là lệnh đáng lẽ sẽ được thực hiện nếu có exception
+
+Khi Stack Frame lưu vào bộ nhớ và khôi phục hoàn tòab tự động, việc sắp xếp trong Stack như hình sau:
+Điều này dẫn đến một khả năng: nếu ta thay đổi thông tin của Stack Frame trong khi xử lí exception, bộ xử lí sẽ cập nhật dữ liệu mới này vào các thanh ghi sau khi thoát exception
+
+
+-----Manual Context Switching:
+quá trình lưu trữ, thay đổi và khôi phục lại Stack Fram mới gọi là Context Switching.
+ứng dụng quá trình này, thay đổi giá trị PC, ta có thể thay đổi việc chạy fiuawx các Task với nhau trong RTOS. Từ đó có thể phát triển ứng dụng giúp các task đồng bộ với nhau,
+++ sử dụng System tich để tạo ngắt định kì -> bên trong hàm ngăys xử lý để chọn task thực thi-> sau đó cập nhật

@@ -1,0 +1,72 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             |.TEXT|,CODE,READONLY,ALIGN=2
+    2 00000000                 THUMB
+    3 00000000                 EXTERN           currentPt
+    4 00000000                 EXPORT           osSchedulerLaunch
+    5 00000000         
+    6 00000000         osSchedulerLaunch
+    7 00000000 4807            LDR              R0, =currentPt
+    8 00000002 6802            LDR              R2, [R0]
+    9 00000004         
+   10 00000004 F8D2 D000       LDR              SP, [R2]
+   11 00000008 E8BD 0FF0       POP              {R4-R11}
+   12 0000000C BC0F            POP              {R0-R3}
+   13 0000000E F85D CB04       POP              {R12}
+   14 00000012 B001            ADD              SP, SP, #4
+   15 00000014 F85D EB04       POP              {LR}
+   16 00000018 B001            ADD              SP, SP, #4
+   17 0000001A         
+   18 0000001A B662            CPSIE            I
+   19 0000001C 4770            BX               LR
+   20 0000001E         
+   21 0000001E                 END
+              00 00 00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=rtos_1\oskernel.d -ortos_1\oskernel.o -I.\RTE\_RTOS_1 -IC:\U
+sers\Loc\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include --predefine
+="__UVISION_VERSION SETA 531" --predefine="_RTE_ SETA 1" --predefine="STM32F446
+xx SETA 1" --predefine="_RTE_ SETA 1" --list=oskernel.lst osKernel.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.TEXT 00000000
+
+Symbol: .TEXT
+   Definitions
+      At line 1 in file osKernel.s
+   Uses
+      None
+Comment: .TEXT unused
+osSchedulerLaunch 00000000
+
+Symbol: osSchedulerLaunch
+   Definitions
+      At line 6 in file osKernel.s
+   Uses
+      At line 4 in file osKernel.s
+Comment: osSchedulerLaunch used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+currentPt 00000000
+
+Symbol: currentPt
+   Definitions
+      At line 3 in file osKernel.s
+   Uses
+      At line 7 in file osKernel.s
+Comment: currentPt used once
+1 symbol
+339 symbols in table

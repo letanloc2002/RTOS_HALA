@@ -1,0 +1,79 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.31.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Le Loc, 123, LIC=KRMW3-AKT2R-DYCV3-A2YZC-6HJEJ-UD86X
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.31.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.14
+Assembler:       Armasm.exe V6.14
+Linker/Locator:  ArmLink.exe V6.14
+Library Manager: ArmAr.exe V6.14
+Hex Converter:   FromElf.exe V6.14
+CPU DLL:         SARMCM3.DLL V5.31.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.7.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+C:\Users\Loc\OneDrive\Desktop\HALA\RTOS_course_HALA\RTOS_1\MDK-ARM\RTOS_1.uvprojx
+Project File Date:  02/06/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.14', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'RTOS_1'
+Note: source file '.\osKernel.s' - object file renamed from 'RTOS_1\osKernel.o' to 'RTOS_1\oskernel_1.o'.
+Note: source file '.\osKernel.s' - object file renamed from 'RTOS_1\osKernel.o' to 'RTOS_1\oskernel_1.o'.
+assembling osKernel.s...
+assembling startup_stm32f446xx.s...
+compiling system_stm32f4xx.c...
+../Core/Src/main.c(54): warning: implicit declaration of function 'osKernelAddPeriodicThreads' is invalid in C99 [-Wimplicit-function-declaration]
+        osKernelAddPeriodicThreads(PeriodicTask0,100);
+        ^
+../Core/Src/main.c(59): warning: implicit declaration of function 'osPeriodicTask_Init' is invalid in C99 [-Wimplicit-function-declaration]
+        osPeriodicTask_Init(periodic_events_exe,1000,1);
+        ^
+../Core/Src/main.c(59): error: use of undeclared identifier 'periodic_events_exe'
+        osPeriodicTask_Init(periodic_events_exe,1000,1);
+                            ^
+2 warnings and 1 error generated.
+compiling main.c...
+compiling uart.c...
+osKernel.c(84): warning: implicit declaration of function 'osSchedulerLaunch' is invalid in C99 [-Wimplicit-function-declaration]
+        osSchedulerLaunch();
+        ^
+1 warning generated.
+compiling osKernel.c...
+"RTOS_1\RTOS_1.axf" - 1 Error(s), 3 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
+                ARM.CMSIS.6.1.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.1.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.3.0.0.pack
+                Keil.STM32F4xx_DFP.3.0.0
+                STMicroelectronics STM32F4 Series Device Support
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_RTOS_1
+  C:\Users\Loc\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:6.1.0
+      Include file:  CMSIS\Core\Include\tz_context.h
+Target not created.
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>

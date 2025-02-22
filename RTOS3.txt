@@ -1,0 +1,55 @@
+Thread: về cơ bản là quá trình thực thi của 1 task
+- một thread gồm
++ 1 bộ thanh ghi
++ bộ nhớ Stack
++ chương trình để thực thi
+- khi một thread chạy, thì tấk có toàn quyền sử dụng tài nguyên
+
+- phân loại thread
+
++timed thread
++ event triggers thread
++ main thread
+
+==> STM32 chỉ có 1 core với 1 res bank duy nhất
+===> phải liên tục chuyển đổi việc sử dụng thanh ghi giữa các task
+
+Thread Switching Process
+- là quá trình chuyển đối chạy giữa các task
+
+-Restore, Save Switching
+
+- Thread Control Block
++ tổ chức 1 thread thành 1 cấu trúc dữ liệu
++ là 1 struct chứa thông tin của mỗi Thread. Gồm 2 thông tin chính.
+	+ pointer to Stack
+	+ Pointer to next Thread
+++ ngoài ra còn có các biến thông Thread: Status, ID, Priority
+
+
+- Thread Scheduler đmả nhiệm dừng 1  thread đang chạy và chọn 1 thread tiếp theo để chạy dựa trên thuật toán
++ thường có 3 trạng thái chuyển đổi lãn nhau:
+	+ running: thread đang được thực thi bởi CPU
+	+ Ready: Thread sẵn sàng được thực thi bởi CPU
+	+ Blocked: thread đang đợi 1 sự kiện nào đó để dược kích hoạt.
+- tại 1 thời điểm chỉ có 1 thread ở trạng thái Running, các thread còn lại sẽ ở ready hoặc block
+
+
+- Preemption
+
+- mỗi shceduler sẽ có thuật toán riêng để quyết định rtanjg thái của các Thread
+
+
+- Các thuật toán Scheduler
+
++ First come first serve
+
+
+KỂnl
+- là nhân của 1 OS. Là 1 ctrinh có nhvu điều phối các công việc của RTOS:
++ điều phối hoạt động của các Task dựa trên Scheduler
++ quản lí tài nguyên phần cứng - bộ nhớ, để lưu trữ hoạt động của các task
++ quản lý các cong việc giao tiếp giữa các task, xử lý ngắt,...
+==> kernal sẽ đại diện để điều phối mọi công việc của RTOS
+
+

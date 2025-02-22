@@ -1,0 +1,27 @@
+1. Blocking code
+- thông thường sẽ lập trình theo kiểu polling, chương trình kiểu này dành hầu hết thời gian gian cho hàm delay() --> lãng phí tài nguyên của VDK, con trỏ bị khóa trong delay(), ĐÂY LÀ HẠN CHẾ CỦA POLLING (blocking code)
+- khi lập trình kiểu này thì sẽ có thể gây ra việc lỡ tín hiệu như cảm biến hay nút nhấn, dẫn đến giảm tỉ lệ chính xác của hệ thống
+2. THUẬT NGỮ RTOS.
+a. Task
+- là công việc cụ thể mà hệ thống phải hoàn thành.
+b. RTOS.
+ - có thể giúp các task chạy gần như song song với nhau, giúp khắc phục được nhược điểm của blocking code.
+- hệ điều hành thời gian thực, có chức năng cơ bản của 1 OS, thường ứng dụng cho các hệ thống yêu cầu phản hồi nhanh.
+- có 3 loại: 
+non-RT: k yêu cầu  t/gian phản hồi
+soft RT: trong khoảng thời gian vài trăm ms
+hard RT: vài chục ms
+c. Hệ điều hành (oS)
+- một thiết bị sẽ có nhiều tác vụ chạy cùng lúc
+==> OS là 1 phần mềm quản lý tài nguyên, sắp xếp và lên lịch cho các tác vụ trong hệ thống.
+3. Software Flow trong hệ thốngg nhúng
+   1/ Busy wait
+   2/ Multi-Threads with ISR
+có thể tổ chức các task nhân data là các task chạy nền. Data sẽ được gửi lên cho task chính là Take action xử lý
+- sử dụng ngắt cho các task nền, các task này sẽ được chạy khi có data hoặc chạy sau khoản thời giàn nhất định nhờ timer
+- task chính sẽ luônc ahyj khi các task khác không chạy
+==> chỉ đáp ứng được ở mức Soft RT
+- nếu xảy ra ngắt liên tục thì các ngắt chồng nhau, lúc này xét về độ ưu tiên các ngắt bị dừng thì việc miss dữ liệu sẽ xảy ra.
+   3/RTOS
+để đáp ứng yêu cầu của RTOS, tất cả các task đều sẽ được chạy như 1 task chính và chạy song song với nhau.\
+Mỗi task lúc này sẽ như 1 chương trình riêng, ở đây là một func để thực hiện chức năng của chúng và thường sẽ có 1 vòn lặp vô hạn riêng

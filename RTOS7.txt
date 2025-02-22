@@ -1,0 +1,11 @@
+Thread Data Transfer
+Data Transfer: Kernel có thể sử dụng các biến Global để truyền nhận dữ liệu giữa các Task
+- Nhược: Khi nhiều task ==> tăng nhiều biến, không được quản lý
+
+==> OS đứng ra làm trung gian quản lí việc trao đổi data giữa các Task.
+
+
+- 2 kiểu truyền dữ liệu cơ bản là mailbox và FIFO.
+	+ Mailbox: cho phép truyền dữ liệu giữa 2Task một cách đồng bộ và hiệu quả, nhược điểm là chỉ chứa được 1 data.
+	+ FiFo queue: truyền nhận data giữa các task như một hàng đợi FIFO cơ bản
+
