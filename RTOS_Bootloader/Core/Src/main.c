@@ -81,6 +81,7 @@ void USART1_IRQHandler(void)
         case '1':
 						USART1_SendData((uint8_t *)sendata1,sizeof(sendata1));
             address = ADDR_TASK_1; // Boot vào task1
+					//Boot(ADDR_TASK_1);
             break;
         case '2':
 						USART1_SendData((uint8_t *)sendata2,sizeof(sendata2));
