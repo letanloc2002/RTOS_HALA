@@ -1,0 +1,6 @@
+sử dụng hàm đệ quy để tìm file cần biên dịch
+dùng API của window (có gửi tài liệu tham khảo)
+- viết chương trình list tất cả cổng com-> chọn 1 cổng -> USB to uart truyền thông giữa PC và STM
+
+a(local) = address// được lưu ở vùng RAM, muốn truy cập vùng RAM này thì phải truy cập thông qua SP,(muốn truy cập instruction thì phải truy cập thông qua PC), 
+- hàm boot(a)
