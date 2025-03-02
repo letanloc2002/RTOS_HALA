@@ -1,0 +1,26 @@
+--cpu=Cortex-M4.fp.sp
+"rtos_uarttocom\startup_stm32f446xx.o"
+"rtos_uarttocom\main.o"
+"rtos_uarttocom\stm32f4xx_it.o"
+"rtos_uarttocom\stm32f4xx_hal_msp.o"
+"rtos_uarttocom\stm32f4xx_hal_tim.o"
+"rtos_uarttocom\stm32f4xx_hal_tim_ex.o"
+"rtos_uarttocom\stm32f4xx_hal_rcc.o"
+"rtos_uarttocom\stm32f4xx_hal_rcc_ex.o"
+"rtos_uarttocom\stm32f4xx_hal_flash.o"
+"rtos_uarttocom\stm32f4xx_hal_flash_ex.o"
+"rtos_uarttocom\stm32f4xx_hal_flash_ramfunc.o"
+"rtos_uarttocom\stm32f4xx_hal_gpio.o"
+"rtos_uarttocom\stm32f4xx_hal_dma_ex.o"
+"rtos_uarttocom\stm32f4xx_hal_dma.o"
+"rtos_uarttocom\stm32f4xx_hal_pwr.o"
+"rtos_uarttocom\stm32f4xx_hal_pwr_ex.o"
+"rtos_uarttocom\stm32f4xx_hal_cortex.o"
+"rtos_uarttocom\stm32f4xx_hal.o"
+"rtos_uarttocom\stm32f4xx_hal_exti.o"
+"rtos_uarttocom\system_stm32f4xx.o"
+"rtos_uarttocom\uart.o"
+--strict --scatter "RTOS_UARTtoCOM\RTOS_UARTtoCOM.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "RTOS_UARTtoCOM.map" -o RTOS_UARTtoCOM\RTOS_UARTtoCOM.axf
