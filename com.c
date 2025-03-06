@@ -160,7 +160,7 @@ int main()
     }
 
     // Gui du lieu toi thiet bi
-    const char *data_to_send = "Hello, STM32!\r\n";
+    const char *data_to_send = "Hello, STM32!!!\r\n";
     if (SendData(com_port, data_to_send) == -1)
     {
         ClosePort(com_port);

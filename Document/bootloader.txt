@@ -1,0 +1,18 @@
+bảng vector table 
+- ô đầu tiên chứa giá trị cài đặt của MSP
+- ô thứ 2 là con trỏ tới trình xử lý cài đặt lại hàm, trỏ tới hàm reset để cài đặt lại chương trình 
+
+
+	****BOOTING SEQUENCE*****
+1. khi chương trình khởi động lại nó sẽ đọc chân BOOT0 và BOOT1 để xác định chế độ khởi động
+2. từ địa chỉ 0x0000000 lấy giá trị ở địa chỉ này nạp cho MSP
+3. từ địa chỉ 0x0000004 lấy giá trị ở địa chỉ này nạp cho PC
+   -> PC sẽ chỉ tới câu lệnh tiếp theo được thực thi, do đó ngay sau khi được gán cho giá trị của địa chỉ 0x00000004, VXL sẽ chuyển tới hàm Reset_Hanlder()
+	(Hàm reset_Hanlder(): là hàm cấu hình hệ thống phần cứng, sao chép vùng .data từ Flash và RAM || xóa vùng .bss và sau đó sẽ gọi hàm main() và chuyển quyền điều khiển lại cho hàm main())
+
+
+	****BOOT MODE****
+BOOT1|BOOT0	|	BOOT MODE
+  x     0	| Boot from main flash memory
+  0	1	| Boot from system memory (bootloader)
+  1	1	| Boot from embedded SRAM

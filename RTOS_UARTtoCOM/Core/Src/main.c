@@ -42,9 +42,9 @@ void USART1_IRQHandler(void)
         }
 
         // Ki?m tra ký t? k?t thúc chu?i
-        if (receivedChar == 'n' || receivedChar == '\r') {
+        if ( receivedChar == 0x0A) {
             rxBuffer[rxIndex] = '\0'; // K?t thúc chu?i
-            rxFlag = 1; // B?t c? báo hi?u dã nh?n d? chu?i
+            //rxFlag = 1; // B?t c? báo hi?u dã nh?n d? chu?i
             rxIndex = 0; // Reset index
         }
     }
