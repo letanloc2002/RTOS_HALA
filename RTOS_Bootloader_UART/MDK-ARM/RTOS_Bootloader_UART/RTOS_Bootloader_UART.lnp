@@ -1,0 +1,25 @@
+--cpu=Cortex-M4.fp.sp
+"rtos_bootloader_uart\startup_stm32f446xx.o"
+"rtos_bootloader_uart\main.o"
+"rtos_bootloader_uart\stm32f4xx_it.o"
+"rtos_bootloader_uart\stm32f4xx_hal_msp.o"
+"rtos_bootloader_uart\stm32f4xx_hal_tim.o"
+"rtos_bootloader_uart\stm32f4xx_hal_tim_ex.o"
+"rtos_bootloader_uart\stm32f4xx_hal_rcc.o"
+"rtos_bootloader_uart\stm32f4xx_hal_rcc_ex.o"
+"rtos_bootloader_uart\stm32f4xx_hal_flash.o"
+"rtos_bootloader_uart\stm32f4xx_hal_flash_ex.o"
+"rtos_bootloader_uart\stm32f4xx_hal_flash_ramfunc.o"
+"rtos_bootloader_uart\stm32f4xx_hal_gpio.o"
+"rtos_bootloader_uart\stm32f4xx_hal_dma_ex.o"
+"rtos_bootloader_uart\stm32f4xx_hal_dma.o"
+"rtos_bootloader_uart\stm32f4xx_hal_pwr.o"
+"rtos_bootloader_uart\stm32f4xx_hal_pwr_ex.o"
+"rtos_bootloader_uart\stm32f4xx_hal_cortex.o"
+"rtos_bootloader_uart\stm32f4xx_hal.o"
+"rtos_bootloader_uart\stm32f4xx_hal_exti.o"
+"rtos_bootloader_uart\system_stm32f4xx.o"
+--strict --scatter "RTOS_Bootloader_UART\RTOS_Bootloader_UART.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "RTOS_Bootloader_UART.map" -o RTOS_Bootloader_UART\RTOS_Bootloader_UART.axf
