@@ -1,7 +1,7 @@
 #include "stm32f4xx.h"
 
 #define BOOTLOADER_ADDRESS  0x1FFF0000  // Ð?a ch? Bootloader c?a STM32F4
-#define MAIN_FLASH_ADDRESS  0x08000000  // Ð?a ch? chuong trình chính
+#define MAIN_FLASH_ADDRESS  0x08000000  // Ð?a ch? chuong trình chính, bootloader, OS
 
 #define UART USART1  // S? d?ng UART1 (PA9 = TX, PA10 = RX)
 

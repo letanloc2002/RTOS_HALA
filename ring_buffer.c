@@ -1,14 +1,14 @@
 /**************************************************************************
  * @file    ring_buffer.c
  * @brief   Thuc hien cac thao tac tren bo dem vong (ring buffer)
- * @details T?p tin này ch?a các hàm d? kh?i t?o, thêm, l?y giá tr?,
- *          và ki?m tra tr?ng thái c?a m?t bo dem vong. Bo dem vong
- *          là m?t c?u trúc d? li?u h?u ích trong l?p trình nhúng và
- *          các ?ng d?ng yêu c?u qu?n lý b? nh? hi?u qu?. 
- *          Các ch?c nang bao g?m:
+ * @details T?p tin nï¿½y ch?a cï¿½c hï¿½m d? kh?i t?o, thï¿½m, l?y giï¿½ tr?,
+ *          vï¿½ ki?m tra tr?ng thï¿½i c?a m?t bo dem vong. Bo dem vong
+ *          lï¿½ m?t c?u trï¿½c d? li?u h?u ï¿½ch trong l?p trï¿½nh nhï¿½ng vï¿½
+ *          cï¿½c ?ng d?ng yï¿½u c?u qu?n lï¿½ b? nh? hi?u qu?.
+ *          Cï¿½c ch?c nang bao g?m:
  *          - Khoi tao bo dem vong
- *          - Them giá tr? vào bo dem
- *          - Lay giá tr? t? bo dem
+ *          - Them giï¿½ tr? vï¿½o bo dem
+ *          - Lay giï¿½ tr? t? bo dem
  *          - Kiem tra xem bo dem co rong hay day
  *
  * @author  Nguyen Van Thuong
@@ -26,8 +26,10 @@
  * @param   max_size     Kich thuoc toi da cua bo dem
  * @return  RINGBUFF_STT_t Tra ve RING_OK neu thanh cong, nguoc lai RING_FAIL
  **************************************************************************/
-RINGBUFF_STT_t RINGBUFF_Init(RINGBUFF_TypeDef *ringBuff, uint8_t *ptr_ringBuff, uint32_t max_size) {
-    if (ringBuff == NULL || ptr_ringBuff == NULL || max_size < 2) {
+RINGBUFF_STT_t RINGBUFF_Init(RINGBUFF_TypeDef *ringBuff, uint8_t *ptr_ringBuff, uint32_t max_size)
+{
+    if (ringBuff == NULL || ptr_ringBuff == NULL || max_size < 2)
+    {
         return RING_FAIL; // Tham so khong hop le
     }
 
@@ -47,10 +49,12 @@ RINGBUFF_STT_t RINGBUFF_Init(RINGBUFF_TypeDef *ringBuff, uint8_t *ptr_ringBuff, 
  * @param   value    Gia tri can them vao bo dem
  * @return  RINGBUFF_STT_t Tra ve RING_OK neu thanh cong, nguoc lai RING_FAIL
  **************************************************************************/
-RINGBUFF_STT_t RINGBUFF_Put(RINGBUFF_TypeDef *ringBuff, uint8_t value) {
+RINGBUFF_STT_t RINGBUFF_Put(RINGBUFF_TypeDef *ringBuff, uint8_t value)
+{
     uint32_t nextHead = (ringBuff->head + 1) % ringBuff->size;
 
-    if (nextHead == ringBuff->tail) {
+    if (nextHead == ringBuff->tail)
+    {
         return RING_FAIL; // Bo dem day
     }
 
@@ -68,8 +72,10 @@ RINGBUFF_STT_t RINGBUFF_Put(RINGBUFF_TypeDef *ringBuff, uint8_t value) {
  * @param   value    Con tro den gia tri lay ra
  * @return  RINGBUFF_STT_t Tra ve RING_OK neu thanh cong, nguoc lai RING_FAIL
  **************************************************************************/
-RINGBUFF_STT_t RINGBUFF_Get(RINGBUFF_TypeDef *ringBuff, uint8_t *value) {
-    if (ringBuff->head == ringBuff->tail) {
+RINGBUFF_STT_t RINGBUFF_Get(RINGBUFF_TypeDef *ringBuff, uint8_t *value)
+{
+    if (ringBuff->head == ringBuff->tail)
+    {
         return RING_FAIL; // Bo dem rong
     }
 
@@ -85,7 +91,8 @@ RINGBUFF_STT_t RINGBUFF_Get(RINGBUFF_TypeDef *ringBuff, uint8_t *value) {
  * @param   ringBuff Con tro den bo dem vong
  * @return  bool Tra ve true neu rong, false neu khong
  **************************************************************************/
-bool RINGBUFF_IsEmpty(RINGBUFF_TypeDef *ringBuff) {
+bool RINGBUFF_IsEmpty(RINGBUFF_TypeDef *ringBuff)
+{
     return (ringBuff->head == ringBuff->tail); // Kiem tra tinh trang rong
 }
 
@@ -95,7 +102,8 @@ bool RINGBUFF_IsEmpty(RINGBUFF_TypeDef *ringBuff) {
  * @param   ringBuff Con tro den bo dem vong
  * @return  bool Tra ve true neu day, false neu khong
  **************************************************************************/
-bool RINGBUFF_IsFull(RINGBUFF_TypeDef *ringBuff) {
+bool RINGBUFF_IsFull(RINGBUFF_TypeDef *ringBuff)
+{
     uint32_t nextHead = (ringBuff->head + 1) % ringBuff->size;
     return (nextHead == ringBuff->tail); // Kiem tra tinh trang day
 }

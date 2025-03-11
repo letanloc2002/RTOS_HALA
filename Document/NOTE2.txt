@@ -1,0 +1,11 @@
+viết lại OS (xử lí trên process)
+viết lại bootloader theo yêu cầu hôm trước
+
+
+**********
+kéo file exe vào môi trường window
+********
+các giai đoạn build 1 file từ .c -> exe
+toolchain là gì
+keilC su dung toolchain gì?
+******
