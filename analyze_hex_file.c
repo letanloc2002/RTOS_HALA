@@ -11,12 +11,11 @@
 
 typedef enum
 {
-    Packet_type_CMD;
-    Packet_type_DATA;
-    Packet_type_HEADER;
-    Packet_type_RESPONSE;
-}
-Packet_type;
+    Packet_type_CMD,
+    Packet_type_DATA,
+    Packet_type_HEADER,
+    Packet_type_RESPONSE,
+} Packet_type;
 
 // Hàm đếm số dòng trong file để cấp phát động
 size_t

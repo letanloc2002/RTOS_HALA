@@ -13,14 +13,8 @@
  * @author  Lê Tấn Lộc
  * @date    11/03/2025
  **************************************************************************/
-
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
-#include <windows.h>
-#include "HOST_LIB.h"
-#define MAX_PATH_LEN 512
+#include "host_lib.h"
 
 /**************************************************************************
  * @brief   Hàm đếm số dòng trong file để cấp phát động
@@ -79,100 +73,72 @@ bool verify_checksum(const char *line)
  * @brief   Hàm đọc file HEX với cấp phát động và in ra kết quả theo yêu cầu
  * @details Đọc file HEX sau đó thông báo về kết quả của việc đọc file
  * @param   file_path   con trỏ đến mảng chuỗi kí tự là đường dẫn của file cần mở
- * @return
+ * @param   data_size   con trỏ chứa kích thước của data
+ * @return  hex_data    con trỏ trỏ đến dữ liệu đọc được từ file hex
  **************************************************************************/
-void read_hex_file(const char *file_path)
+uint8_t *read_hex_file(const char *file_path, size_t *data_size)
 {
+    *data_size = 0;
     size_t line_count = count_lines(file_path);
+
     if (line_count == 0)
     {
         printf("File rỗng hoặc không thể đọc.\n");
-        return;
+        return NULL;
     }
 
     FILE *file = fopen(file_path, "r");
     if (!file)
     {
         perror("Không thể mở file");
-        return;
+        return NULL;
     }
 
-    // Cấp phát động cho từng dòng HEX
-    char **lines = (char **)malloc(line_count * sizeof(char *));
-    if (!lines)
-    {
-        perror("Lỗi cấp phát bộ nhớ");
-        fclose(file);
-        return;
-    }
+    uint8_t *hex_data = NULL;
+    size_t total_size = 0;
 
-    // Đọc từng dòng và lưu vào bộ nhớ động
-    size_t index = 0;
     char buffer[512];
-    while (fgets(buffer, sizeof(buffer), file) && index < line_count)
+    while (fgets(buffer, sizeof(buffer), file))
     {
         buffer[strcspn(buffer, "\r\n")] = '\0'; // Loại bỏ ký tự xuống dòng
-        lines[index] = strdup(buffer);          // Sao chép dòng vào bộ nhớ động
-        if (!lines[index])
-        {
-            perror("Lỗi cấp phát bộ nhớ cho dòng");
-            fclose(file);
-            return;
-        }
-        index++;
-    }
-    fclose(file);
 
-    // Xử lý từng dòng HEX
-    for (size_t i = 0; i < line_count; i++)
-    {
-        char *line = lines[i];
-
-        if (line[0] != ':')
+        if (buffer[0] != ':')
             continue; // Bỏ qua dòng không hợp lệ
-        if (!verify_checksum(line))
+        if (!verify_checksum(buffer))
             continue; // Bỏ qua dòng có checksum không hợp lệ
 
         // Đọc loại bản ghi
-        char record_type_str[3] = {line[7], line[8], '\0'};
+        char record_type_str[3] = {buffer[7], buffer[8], '\0'};
         uint8_t record_type = (uint8_t)strtol(record_type_str, NULL, 16);
         if (record_type != 0x00)
             continue; // Chỉ xử lý dữ liệu
 
         // Đọc độ dài dữ liệu
-        char data_length_str[3] = {line[1], line[2], '\0'};
+        char data_length_str[3] = {buffer[1], buffer[2], '\0'};
         uint8_t data_length = (uint8_t)strtol(data_length_str, NULL, 16);
 
-        // Cấp phát động cho dữ liệu
-        char *data = (char *)malloc(data_length);
-        if (!data)
+        // Cấp phát động cho dữ liệu mới
+        uint8_t *new_data = realloc(hex_data, total_size + data_length);
+        if (!new_data)
         {
-            perror("Lỗi cấp phát bộ nhớ cho dữ liệu");
-            continue;
+            perror("Lỗi cấp phát bộ nhớ");
+            free(hex_data);
+            fclose(file);
+            return NULL;
         }
+        hex_data = new_data;
 
         // Đọc dữ liệu từ dòng HEX
         for (int j = 0; j < data_length * 2; j += 2)
         {
-            data[j / 2] = (char)strtol((char[]){line[9 + j], line[10 + j], '\0'}, NULL, 16);
+            hex_data[total_size + (j / 2)] = (uint8_t)strtol((char[]){buffer[9 + j], buffer[10 + j], '\0'}, NULL, 16);
         }
 
-        // In dữ liệu ra màn hình
-        for (int j = 0; j < data_length; j++)
-        {
-            printf("%02X", (uint8_t)data[j]);
-        }
-        printf("\n"); // Xuống dòng sau mỗi đoạn dữ liệu
-
-        free(data); // Giải phóng bộ nhớ của dữ liệu
+        total_size += data_length;
     }
-
-    // Giải phóng bộ nhớ của từng dòng
-    for (size_t i = 0; i < line_count; i++)
-    {
-        free(lines[i]);
-    }
-    free(lines); // Giải phóng mảng con trỏ
+    fclose(file);
+    *data_size = total_size;
+    return hex_data;
 }
 
 /**************************************************************************
