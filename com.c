@@ -157,10 +157,10 @@ int main()
     if (com_port == INVALID_HANDLE_VALUE)
     {
         return 1;
-    }
+        }
 
     // Gui du lieu toi thiet bi
-    const char *data_to_send = "Hello, STM32!!!\r\n";
+    const char *data_to_send = "Hello, 123456!!!\r\n";
     if (SendData(com_port, data_to_send) == -1)
     {
         ClosePort(com_port);

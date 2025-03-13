@@ -1,5 +1,11 @@
 #ifndef HOST_LIB_H_
 #define HOST_LIB_H_
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <windows.h>
+#include <stdbool.h>
 // Hàm đếm số dòng trong file để cấp phát động
 size_t count_lines(const char *file_path);
 // Hàm kiểm tra checksum

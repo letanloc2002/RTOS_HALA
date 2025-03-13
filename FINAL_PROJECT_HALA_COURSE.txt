@@ -1,0 +1,17 @@
+Bước 1: Tạo và phân biệt 3 file
+
+	1. HOST PC
+- đọc file hex
+- tìm ra đường dẫn
+- tạo frame
+- truyền các frame
+- nhận tín hiệu NACK/ACK
+- xử lý nếu nhận được NACK và ACK.
+	2. BOOTLOADER AND OS
+- viết lại boot loader hoàn chỉnh
+- viết hệ thống RTOS 
+- phân tích frame nhận được.
+- xử lý data
+
+	3. APPLICATION
+- tạo ra 3 task truyền chuỗi UART
