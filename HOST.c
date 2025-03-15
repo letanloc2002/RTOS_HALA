@@ -52,8 +52,17 @@ int main()
         return 1;
     }
     // Tạo một khung dữ liệu
-    Data_frame frame = {0x7E, 0x01, 16, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}, 0, 0x7E};
+    Data_frame frame;
+    frame.Start_Of_Frame = 0x7E;
+    frame.Type = 0x01;
+    frame.Data_Lenght = 16;
+    for (int i = 0; i < 16; i++)
+    {
+        frame.Data[i] = 1;
+    }
 
+    frame.CRC32 = 0x12345678;
+    frame.End_Of_Frame = 0x7E;
     // Gửi dữ liệu
     int re = SendData(com_port, &frame);
 

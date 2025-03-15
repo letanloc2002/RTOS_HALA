@@ -28,7 +28,7 @@ volatile uint8_t rxBuf[100];
 #define RX_BUFFER_SIZE 100 // Kích thu?c buffer nh?n d? li?u
 
 // Bi?n toàn c?c
-char rxBuffer[RX_BUFFER_SIZE]; // Buffer d? luu d? li?u nh?n du?c
+uint8_t rxBuffer[RX_BUFFER_SIZE]; // Buffer d? luu d? li?u nh?n du?c
 volatile uint8_t rxIndex = 0;  // Index d? theo dõi v? trí trong buffer
 volatile uint8_t rxFlag = 0;   // C? báo hi?u dã nh?n d? chu?i
 void USART1_IRQHandler(void)
@@ -50,7 +50,8 @@ void USART1_IRQHandler(void)
     }
 } 
 int main(void)
- {
+
+{
 	USART1_Init();
 	USART1_ReceiveInT_Setup();
 	USART1_SendData((uint8_t *)sendata,sizeof(sendata));
