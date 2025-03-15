@@ -103,18 +103,19 @@ void ClosePort(HANDLE com_port)
     }
 }
 
-// Gui du lieu toi cong COM
-int SendData(HANDLE com_port, const char *data)
+int SendData(HANDLE com_port, uint8_t *data, size_t data_length)
 {
-    DWORD dNoOFBytestoWrite = strlen(data);
+    DWORD dNoOFBytestoWrite = (DWORD)data_length; // Số lượng byte cần gửi
     DWORD dNoOfBytesWritten;
+
     if (!WriteFile(com_port, data, dNoOFBytestoWrite, &dNoOfBytesWritten, NULL))
     {
         printf("Loi khi gui du lieu.\n");
         return -1;
     }
+
     printf("Da gui %d byte du lieu.\n", dNoOfBytesWritten);
-    return dNoOfBytesWritten;
+    return (int)dNoOfBytesWritten;
 }
 
 // Nhan du lieu tu cong COM
@@ -147,6 +148,8 @@ int ReceiveData(HANDLE com_port, uint8_t *buffer, int len)
     return NoBytesRead;
 }
 
+/// @brief
+/// @return
 int main()
 {
 
@@ -157,16 +160,21 @@ int main()
     if (com_port == INVALID_HANDLE_VALUE)
     {
         return 1;
-        }
+    }
 
-    // Gui du lieu toi thiet bi
-    const char *data_to_send = "Hello, 123456!!!\r\n";
+    /*// Gui du lieu toi thiet bi
+    uint8_t data_to_send[16] = {0x01, 0x20, 0x23, 0x23, 0x43, 0x01, 0x20, 0x23, 0x23, 0x43, 0x01, 0x20, 0x23, 0x23, 0x43, 0x23};
     if (SendData(com_port, data_to_send) == -1)
     {
         ClosePort(com_port);
         return 1;
-    }
+    }*/
+    // Chuỗi mã hex cần gửi (ví dụ: 0x01, 0x02)
+    uint8_t hex_data[] = {0x01, 0x02, 0x03, 0x04};
+    size_t data_length = sizeof(hex_data) / sizeof(hex_data[0]);
 
+    // Gửi dữ liệu
+    int result = SendData(com_port, hex_data, data_length);
     // // Nhan du lieu tu thiet bi
     // char read_buffer[100];
     // while (1) {

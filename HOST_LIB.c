@@ -314,17 +314,23 @@ void ClosePort(HANDLE com_port)
  * @param   data        chuỗi data cần gửi
  * @return
  **************************************************************************/
-int SendData(HANDLE com_port, const char *data)
+// Hàm gửi struct Data_frame qua cổng COM
+int SendData(HANDLE com_port, Data_frame *frame)
 {
-    DWORD dNoOFBytestoWrite = strlen(data);
-    DWORD dNoOfBytesWritten;
-    if (!WriteFile(com_port, data, dNoOFBytestoWrite, &dNoOfBytesWritten, NULL))
+    DWORD bytesWritten;
+
+    // Tính CRC32 trước khi gửi
+    // frame->CRC32 = calculate_crc32((uint8_t *)frame, sizeof(Data_frame) - sizeof(uint32_t) - sizeof(uint8_t));
+
+    // Gửi toàn bộ struct dưới dạng mảng byte
+    if (!WriteFile(com_port, (uint8_t *)frame, sizeof(Data_frame), &bytesWritten, NULL))
     {
-        printf("Loi khi gui du lieu.\n");
+        printf("Lỗi khi gửi dữ liệu.\n");
         return -1;
     }
-    printf("Da gui %d byte du lieu.\n", dNoOfBytesWritten);
-    return dNoOfBytesWritten;
+
+    printf("Đã gửi %d byte dữ liệu.\n", bytesWritten);
+    return (int)bytesWritten;
 }
 
 /**************************************************************************

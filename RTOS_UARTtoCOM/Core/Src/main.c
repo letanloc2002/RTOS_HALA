@@ -34,7 +34,7 @@ volatile uint8_t rxFlag = 0;   // C? báo hi?u dã nh?n d? chu?i
 void USART1_IRQHandler(void)
 {
 	if (USART1->SR & USART_SR_RXNE) { // Ki?m tra xem có d? li?u m?i không
-        char receivedChar = (char)(USART1->DR & 0xFF); // Ð?c ký t?
+        uint8_t receivedChar = (uint8_t)(USART1->DR & 0xFF); // Ð?c ký t?
 
         // Luu ký t? vào buffer
         if (rxIndex < RX_BUFFER_SIZE - 1) {
@@ -42,15 +42,15 @@ void USART1_IRQHandler(void)
         }
 
         // Ki?m tra ký t? k?t thúc chu?i
-        if ( receivedChar == 0x0A) {
-            rxBuffer[rxIndex] = '\0'; // K?t thúc chu?i
-            //rxFlag = 1; // B?t c? báo hi?u dã nh?n d? chu?i
-            rxIndex = 0; // Reset index
-        }
+//        if ( receivedChar == 0x0A) {
+//            rxBuffer[rxIndex] = '\0'; // K?t thúc chu?i
+//            //rxFlag = 1; // B?t c? báo hi?u dã nh?n d? chu?i
+//            rxIndex = 0; // Reset index
+//        }
     }
 } 
 int main(void)
-{
+ {
 	USART1_Init();
 	USART1_ReceiveInT_Setup();
 	USART1_SendData((uint8_t *)sendata,sizeof(sendata));

@@ -1082,13 +1082,13 @@ Image Symbol Table
     [Anonymous Symbol]                       0x08000360   Section        0  system_stm32f4xx.o(.text.SystemInit)
     [Anonymous Symbol]                       0x08000374   Section        0  uart.o(.text.UART1_GPIO_Init)
     [Anonymous Symbol]                       0x080003bc   Section        0  main.o(.text.USART1_IRQHandler)
-    [Anonymous Symbol]                       0x08000400   Section        0  uart.o(.text.USART1_Init)
-    [Anonymous Symbol]                       0x08000464   Section        0  uart.o(.text.USART1_ReceiveInT_Setup)
-    [Anonymous Symbol]                       0x08000484   Section        0  uart.o(.text.USART1_SendData)
-    [Anonymous Symbol]                       0x080004b0   Section        0  stm32f4xx_it.o(.text.UsageFault_Handler)
-    [Anonymous Symbol]                       0x080004b4   Section        0  main.o(.text.main)
-    $v0                                      0x080004ce   Number         0  fpinit.o(x$fpl$fpinit)
-    x$fpl$fpinit                             0x080004ce   Section       26  fpinit.o(x$fpl$fpinit)
+    [Anonymous Symbol]                       0x080003f0   Section        0  uart.o(.text.USART1_Init)
+    [Anonymous Symbol]                       0x08000454   Section        0  uart.o(.text.USART1_ReceiveInT_Setup)
+    [Anonymous Symbol]                       0x08000474   Section        0  uart.o(.text.USART1_SendData)
+    [Anonymous Symbol]                       0x080004a0   Section        0  stm32f4xx_it.o(.text.UsageFault_Handler)
+    [Anonymous Symbol]                       0x080004a4   Section        0  main.o(.text.main)
+    $v0                                      0x080004be   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x080004be   Section       26  fpinit.o(x$fpl$fpinit)
     .bss                                     0x20000018   Section       96  libspace.o(.bss)
     Heap_Mem                                 0x200000e8   Data         512  startup_stm32f446xx.o(HEAP)
     HEAP                                     0x200000e8   Section      512  startup_stm32f446xx.o(HEAP)
@@ -1290,17 +1290,17 @@ Image Symbol Table
     SysTick_Handler                          0x08000359   Thumb Code     8  stm32f4xx_it.o(.text.SysTick_Handler)
     SystemInit                               0x08000361   Thumb Code    18  system_stm32f4xx.o(.text.SystemInit)
     UART1_GPIO_Init                          0x08000375   Thumb Code    72  uart.o(.text.UART1_GPIO_Init)
-    USART1_IRQHandler                        0x080003bd   Thumb Code    68  main.o(.text.USART1_IRQHandler)
-    USART1_Init                              0x08000401   Thumb Code   100  uart.o(.text.USART1_Init)
-    USART1_ReceiveInT_Setup                  0x08000465   Thumb Code    32  uart.o(.text.USART1_ReceiveInT_Setup)
-    USART1_SendData                          0x08000485   Thumb Code    44  uart.o(.text.USART1_SendData)
-    UsageFault_Handler                       0x080004b1   Thumb Code     2  stm32f4xx_it.o(.text.UsageFault_Handler)
-    main                                     0x080004b5   Thumb Code    26  main.o(.text.main)
-    _fp_init                                 0x080004cf   Thumb Code    26  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x080004e7   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x080004e7   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x080004e8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000508   Number         0  anon$$obj.o(Region$$Table)
+    USART1_IRQHandler                        0x080003bd   Thumb Code    50  main.o(.text.USART1_IRQHandler)
+    USART1_Init                              0x080003f1   Thumb Code   100  uart.o(.text.USART1_Init)
+    USART1_ReceiveInT_Setup                  0x08000455   Thumb Code    32  uart.o(.text.USART1_ReceiveInT_Setup)
+    USART1_SendData                          0x08000475   Thumb Code    44  uart.o(.text.USART1_SendData)
+    UsageFault_Handler                       0x080004a1   Thumb Code     2  stm32f4xx_it.o(.text.UsageFault_Handler)
+    main                                     0x080004a5   Thumb Code    26  main.o(.text.main)
+    _fp_init                                 0x080004bf   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x080004d7   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x080004d7   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x080004d8   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080004f8   Number         0  anon$$obj.o(Region$$Table)
     sendata                                  0x20000000   Data          17  main.o(.data.sendata)
     uwTickFreq                               0x20000011   Data           1  stm32f4xx_hal.o(.data.uwTickFreq)
     __libspace_start                         0x20000018   Data          96  libspace.o(.bss)
@@ -1317,9 +1317,9 @@ Memory Map of the image
 
   Image Entry point : 0x080001c5
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000520, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000510, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000508, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000004f8, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1401,30 +1401,31 @@ Memory Map of the image
     0x08000360   0x08000360   0x00000012   Code   RO          550    .text.SystemInit    system_stm32f4xx.o
     0x08000372   0x08000372   0x00000002   PAD
     0x08000374   0x08000374   0x00000048   Code   RO          565    .text.UART1_GPIO_Init  uart.o
-    0x080003bc   0x080003bc   0x00000044   Code   RO           11    .text.USART1_IRQHandler  main.o
-    0x08000400   0x08000400   0x00000064   Code   RO          567    .text.USART1_Init   uart.o
-    0x08000464   0x08000464   0x00000020   Code   RO          569    .text.USART1_ReceiveInT_Setup  uart.o
-    0x08000484   0x08000484   0x0000002c   Code   RO          571    .text.USART1_SendData  uart.o
-    0x080004b0   0x080004b0   0x00000002   Code   RO           36    .text.UsageFault_Handler  stm32f4xx_it.o
-    0x080004b2   0x080004b2   0x00000002   PAD
-    0x080004b4   0x080004b4   0x0000001a   Code   RO           13    .text.main          main.o
-    0x080004ce   0x080004ce   0x0000001a   Code   RO          703    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x080004e8   0x080004e8   0x00000020   Data   RO          764    Region$$Table       anon$$obj.o
+    0x080003bc   0x080003bc   0x00000032   Code   RO           11    .text.USART1_IRQHandler  main.o
+    0x080003ee   0x080003ee   0x00000002   PAD
+    0x080003f0   0x080003f0   0x00000064   Code   RO          567    .text.USART1_Init   uart.o
+    0x08000454   0x08000454   0x00000020   Code   RO          569    .text.USART1_ReceiveInT_Setup  uart.o
+    0x08000474   0x08000474   0x0000002c   Code   RO          571    .text.USART1_SendData  uart.o
+    0x080004a0   0x080004a0   0x00000002   Code   RO           36    .text.UsageFault_Handler  stm32f4xx_it.o
+    0x080004a2   0x080004a2   0x00000002   PAD
+    0x080004a4   0x080004a4   0x0000001a   Code   RO           13    .text.main          main.o
+    0x080004be   0x080004be   0x0000001a   Code   RO          703    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x080004d8   0x080004d8   0x00000020   Data   RO          764    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000508, Size: 0x000006e8, Max: 0x00020000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080004f8, Size: 0x000006e8, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08000508   0x00000011   Data   RW           15    .data.sendata       main.o
-    0x20000011   0x08000519   0x00000001   Data   RW          514    .data.uwTickFreq    stm32f4xx_hal.o
-    0x20000012   0x0800051a   0x00000006   PAD
+    0x20000000   0x080004f8   0x00000011   Data   RW           15    .data.sendata       main.o
+    0x20000011   0x08000509   0x00000001   Data   RW          514    .data.uwTickFreq    stm32f4xx_hal.o
+    0x20000012   0x0800050a   0x00000006   PAD
     0x20000018        -       0x00000060   Zero   RW          631    .bss                c_w.l(libspace.o)
     0x20000078        -       0x00000064   Zero   RW           18    .bss.rxBuffer       main.o
     0x200000dc        -       0x00000001   Zero   RW           16    .bss.rxIndex        main.o
-    0x200000dd   0x0800051a   0x00000003   PAD
+    0x200000dd   0x0800050a   0x00000003   PAD
     0x200000e0        -       0x00000004   Zero   RW          515    .bss.uwTick         stm32f4xx_hal.o
-    0x200000e4   0x0800051a   0x00000004   PAD
+    0x200000e4   0x0800050a   0x00000004   PAD
     0x200000e8        -       0x00000200   Zero   RW            2    HEAP                startup_stm32f446xx.o
     0x200002e8        -       0x00000400   Zero   RW            1    STACK               startup_stm32f446xx.o
 
@@ -1436,7 +1437,7 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        94          0          0         17        101       1295   main.o
+        76          0          0         17        101       1289   main.o
         64         26        452          0       1536        844   startup_stm32f446xx.o
         26          0          0          1          4       7478   stm32f4xx_hal.o
         24          0          0          0          0       1030   stm32f4xx_it.o
@@ -1444,9 +1445,9 @@ Image component sizes
        248          0          0          0          0       3212   uart.o
 
     ----------------------------------------------------------------------
-       494         26        484         20       1652      16578   Object Totals
+       478         26        484         20       1652      16572   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        20          0          0          2         11          0   (incl. Padding)
+        22          0          0          2         11          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1495,15 +1496,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-       804         42        484         20       1748      17058   Grand Totals
-       804         42        484         20       1748      17058   ELF Image Totals
-       804         42        484         20          0          0   ROM Totals
+       788         42        484         20       1748      17052   Grand Totals
+       788         42        484         20       1748      17052   ELF Image Totals
+       788         42        484         20          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1288 (   1.26kB)
+    Total RO  Size (Code + RO Data)                 1272 (   1.24kB)
     Total RW  Size (RW Data + ZI Data)              1768 (   1.73kB)
-    Total ROM Size (Code + RO Data + RW Data)       1308 (   1.28kB)
+    Total ROM Size (Code + RO Data + RW Data)       1292 (   1.26kB)
 
 ==============================================================================
 
